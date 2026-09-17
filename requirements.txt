@@ -1,0 +1,4 @@
+PyQt6>=6.4
+# Optional: only needed to load a trained bidding model from models/mushtra_model.pkl
+joblib>=1.2
+scikit-learn>=1.1

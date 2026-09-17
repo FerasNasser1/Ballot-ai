@@ -1,0 +1,305 @@
+/* An evening majlis: dark qahwa brown, a Sadu-woven table, cream cards,
+   saffron for our team and Najdi-door blue for theirs. Mirrors the desktop theme. */
+:root {
+  --coffee-900: #1b120c;
+  --coffee-800: #251912;
+  --coffee-700: #35251b;
+  --coffee-400: #8a6d57;
+  --sadu-red: #8e2b24;
+  --sadu-red-deep: #661b16;
+  --sadu-black: #1a1411;
+  --paper: #f6eedc;
+  --paper-edge: #cdb892;
+  --ink: #2a1f18;
+  --card-red: #a3231b;
+  --saffron: #d8a93f;
+  --najdi-blue: #5b8db0;
+  --card-w: 74px;
+  --card-h: 106px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--coffee-900);
+  color: var(--paper);
+  font-family: "Segoe UI", "Noto Sans", "Noto Sans Arabic", Tahoma, "DejaVu Sans", sans-serif;
+  font-size: 15px;
+  min-height: 100vh;
+}
+
+.ar { font-family: "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif; }
+.grow { flex: 1; }
+.hidden { display: none !important; }
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--coffee-700);
+  flex-wrap: wrap;
+}
+
+h1 { font-family: Georgia, "Noto Serif", serif; font-size: 26px; margin: 0; font-weight: 700; }
+h1 .ar { color: var(--saffron); margin-inline-start: 6px; }
+
+.chip {
+  background: var(--coffee-700);
+  border: 1px solid var(--sadu-red);
+  border-radius: 16px;
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+button {
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  border-radius: 19px;
+  padding: 9px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+button:hover { background: #fff8e8; }
+button.buy { background: var(--saffron); color: var(--sadu-black); }
+button.buy:hover { background: #e6bc5a; }
+button.quiet { background: transparent; color: var(--paper); border: 1px solid var(--coffee-400); }
+button.quiet:hover { border-color: var(--paper); }
+
+main {
+  display: flex;
+  gap: 22px;
+  padding: 18px 22px 28px;
+  align-items: flex-start;
+}
+
+.board { flex: 1; min-width: 0; }
+aside { width: 250px; flex: none; }
+
+.seat-row { display: flex; justify-content: center; }
+.middle { display: flex; align-items: center; gap: 10px; }
+.middle .rug { flex: 1; }
+
+/* ------------------------------------------------------------------ seats */
+.seat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  min-height: 74px;
+  width: 210px;
+}
+.seat.side { width: 150px; flex-direction: column; text-align: center; gap: 4px; }
+.seat .avatar {
+  width: 52px; height: 52px; flex: none;
+  border-radius: 50%;
+  background: var(--coffee-700);
+  border: 3px solid var(--najdi-blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px; font-weight: 600;
+}
+.seat.ours .avatar { border-color: var(--saffron); }
+.seat.active .avatar { box-shadow: 0 0 0 7px rgba(216, 169, 63, 0.3); }
+.seat .name { font-weight: 600; }
+.seat .sub { color: var(--coffee-400); font-size: 13px; }
+.seat .badge {
+  display: inline-block;
+  background: var(--najdi-blue);
+  color: var(--sadu-black);
+  border-radius: 10px;
+  padding: 1px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 3px;
+}
+.seat.ours .badge { background: var(--saffron); }
+.seat .backs { display: flex; margin-top: 4px; }
+.seat .back {
+  width: 13px; height: 18px; margin-inline-end: -4px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(45deg, var(--sadu-red-deep) 0 3px, var(--sadu-black) 3px 6px);
+  border: 1px solid var(--sadu-black);
+}
+
+/* -------------------------------------------------------------------- rug */
+.rug {
+  position: relative;
+  min-height: 310px;
+  border: 22px solid transparent;
+  border-image: repeating-linear-gradient(45deg,
+      var(--paper) 0 8px, var(--sadu-black) 8px 16px, var(--sadu-red) 16px 24px) 22;
+  background:
+    repeating-linear-gradient(45deg, rgba(26, 20, 17, 0.25) 0 2px, transparent 2px 24px),
+    repeating-linear-gradient(-45deg, rgba(26, 20, 17, 0.25) 0 2px, transparent 2px 24px),
+    var(--sadu-red-deep);
+  display: grid;
+  place-items: center;
+}
+.slot {
+  position: absolute;
+  width: var(--card-w); height: var(--card-h);
+  border: 1.5px dashed rgba(246, 238, 220, 0.25);
+  border-radius: 7px;
+  display: grid; place-items: center;
+}
+.slot[data-slot="0"] { bottom: 8%; left: 50%; transform: translateX(-50%); }
+.slot[data-slot="2"] { top: 8%; left: 50%; transform: translateX(-50%); }
+.slot[data-slot="1"] { top: 50%; right: 16%; transform: translateY(-50%); }
+.slot[data-slot="3"] { top: 50%; left: 16%; transform: translateY(-50%); }
+.slot.filled { border-color: transparent; }
+.slot.won .card { outline: 3px solid var(--saffron); outline-offset: 1px; }
+.ground { position: absolute; }
+
+.bubble {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 19px;
+  padding: 7px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+.bubble.bought { background: var(--saffron); color: var(--sadu-black); }
+
+/* ------------------------------------------------------------------ cards */
+.card {
+  width: var(--card-w); height: var(--card-h);
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--paper-edge);
+  border-radius: 7px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-family: Georgia, "Noto Serif", serif;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  user-select: none;
+}
+.card.red { color: var(--card-red); }
+.card .corner { position: absolute; top: 3px; left: 5px; font-size: 15px; font-weight: 700; line-height: 1.05; text-align: center; }
+.card .corner .suit { display: block; font-size: 13px; }
+.card .pip { font-size: 30px; }
+.card.face .pip { font-size: 26px; border: 1.4px solid var(--saffron); border-radius: 4px; padding: 2px 9px; background: rgba(216, 169, 63, 0.12); }
+.card .trump-dot {
+  position: absolute; top: 5px; right: 5px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--saffron);
+}
+.card.back {
+  background: repeating-linear-gradient(45deg, var(--sadu-red-deep) 0 6px, var(--sadu-black) 6px 12px);
+  border-color: var(--sadu-black);
+}
+
+/* ------------------------------------------------------------------- hand */
+.hand-row { display: flex; align-items: flex-end; gap: 6px; }
+.hand { flex: 1; display: flex; justify-content: center; gap: 8px; min-height: 118px; padding-top: 10px; flex-wrap: wrap; }
+.hand .card { transition: transform 0.12s ease; }
+.hand .card.playable { cursor: pointer; }
+.hand .card.playable:hover { transform: translateY(-13px); box-shadow: 0 8px 14px rgba(0, 0, 0, 0.5); }
+.hand .card.dimmed { filter: brightness(0.5); }
+
+.status { text-align: center; font-size: 16px; min-height: 24px; padding: 6px 0; }
+.actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; min-height: 40px; margin-bottom: 2px; }
+
+/* ------------------------------------------------------------- score sheet */
+.sheet {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 12px 14px 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.sheet-head { display: flex; text-align: center; }
+.sheet-head > div { flex: 1; }
+.sheet-head .big { font-size: 22px; font-family: Georgia, serif; display: block; }
+.sheet-head .small { color: #7a6a52; font-size: 12px; }
+.sheet-head .us { border-bottom: 3px solid var(--saffron); margin-inline-end: 6px; padding-bottom: 4px; }
+.sheet-head .them { border-bottom: 3px solid var(--najdi-blue); margin-inline-start: 6px; padding-bottom: 4px; }
+.sheet-rows { min-height: 150px; max-height: 260px; overflow-y: auto; margin-top: 6px; }
+.sheet-rows .row {
+  display: flex; text-align: center;
+  border-bottom: 1px solid rgba(205, 184, 146, 0.6);
+  padding: 3px 0;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  position: relative;
+}
+.sheet-rows .row > div { flex: 1; border-inline-end: 1px solid rgba(205, 184, 146, 0.6); }
+.sheet-rows .row > div:last-child { border: none; }
+.sheet-rows .note {
+  position: absolute; left: 2px; top: 5px;
+  color: var(--card-red); font-size: 11px; font-family: inherit;
+  border: none !important; flex: none !important;
+}
+.sheet-total {
+  display: flex; text-align: center;
+  border-top: 2px double var(--ink);
+  margin-top: 6px; padding-top: 6px;
+  font-family: Georgia, serif; font-size: 25px; font-weight: 700;
+}
+.sheet-total > div { flex: 1; }
+.sheet-foot { text-align: center; color: #7a6a52; font-size: 12px; margin-top: 4px; }
+
+.section { font-size: 15px; margin: 16px 0 6px; }
+.deductions {
+  background: var(--coffee-800);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  min-height: 96px;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------------- dialogs */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(10, 7, 5, 0.72);
+  display: grid; place-items: center;
+  padding: 20px;
+  z-index: 10;
+}
+.dialog {
+  background: var(--coffee-800);
+  border: 2px solid var(--sadu-red);
+  border-radius: 10px;
+  padding: 22px 26px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.dialog h2 { margin: 0 0 6px; font-size: 22px; }
+.dialog h2 .ar { color: var(--saffron); font-size: 20px; margin-inline-start: 8px; }
+.dialog .muted { color: var(--coffee-400); }
+.dialog table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+.dialog th, .dialog td { padding: 5px 8px; text-align: center; }
+.dialog th:first-child, .dialog td:first-child { text-align: start; }
+.dialog .us-col { color: var(--saffron); }
+.dialog .them-col { color: var(--najdi-blue); }
+.dialog tr.strong td { font-weight: 700; font-size: 19px; }
+.dialog .banner {
+  background: var(--sadu-red);
+  border-radius: 8px;
+  padding: 9px 13px;
+  margin: 10px 0;
+}
+.dialog .buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+.dialog .project { display: flex; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+.dialog .project .card { --card-w: 46px; --card-h: 66px; }
+.dialog ul { line-height: 1.6; padding-inline-start: 20px; }
+
+@media (max-width: 900px) {
+  main { flex-direction: column; }
+  aside { width: 100%; }
+  :root { --card-w: 58px; --card-h: 84px; }
+  .seat { width: 160px; }
+  .seat.side { width: 96px; }
+  .rug { min-height: 260px; }
+  .hand { gap: 4px; }
+}

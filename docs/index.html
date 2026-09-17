@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baloot بلوت — play against the AI</title>
+<meta name="description" content="Saudi Baloot against three AI players: Ashkal, Double, Three, Four and Qahwa. Runs entirely in your browser.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🂡</text></svg>">
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Baloot <span class="ar">بلوت</span></h1>
+    <div id="contract" class="chip">Dealing…</div>
+    <div class="grow"></div>
+    <button id="rules-btn" class="quiet">Rules</button>
+    <button id="new-match" class="quiet">New match</button>
+  </header>
+
+  <main>
+    <section class="board">
+      <div class="seat-row">
+        <div class="seat" id="seat-2"></div>
+      </div>
+      <div class="middle">
+        <div class="seat side" id="seat-3"></div>
+        <div class="rug" id="rug">
+          <div class="slot" data-slot="2"></div>
+          <div class="slot" data-slot="3"></div>
+          <div class="slot" data-slot="1"></div>
+          <div class="slot" data-slot="0"></div>
+          <div class="ground" id="ground"></div>
+        </div>
+        <div class="seat side" id="seat-1"></div>
+      </div>
+      <div id="status" class="status">Shuffling…</div>
+      <div id="actions" class="actions"></div>
+      <div class="hand-row">
+        <div class="seat" id="seat-0"></div>
+        <div id="hand" class="hand"></div>
+      </div>
+    </section>
+
+    <aside>
+      <div class="sheet">
+        <div class="sheet-head">
+          <div class="us"><span class="ar big">لنا</span><span class="small">Us</span></div>
+          <div class="them"><span class="ar big">لهم</span><span class="small">Them</span></div>
+        </div>
+        <div id="sheet-rows" class="sheet-rows"></div>
+        <div class="sheet-total">
+          <div id="total-us">0</div>
+          <div id="total-them">0</div>
+        </div>
+        <div class="sheet-foot">First team to 152 wins</div>
+      </div>
+      <h2 class="section">What your partner has deduced</h2>
+      <div id="deductions" class="deductions">Nothing yet.</div>
+    </aside>
+  </main>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="dialog" id="dialog"></div>
+</div>
+
+<script src="baloot.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
