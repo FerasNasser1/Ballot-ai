@@ -11,10 +11,11 @@ Play it two ways: a **desktop app** (Python + PyQt6) or in your **browser** with
 Built for **CSC 361 (Artificial Intelligence), King Saud University** by
 
 | Team |
-|---|
-| Feras Nasser AlNasser |
-| Mohammed Abdulrahman Alrabiah |
-| Naif Mohammed Alanazi |
+| Contributor | GitHub |
+|---|---|
+| Feras Nasser AlNasser | [@FerasNasser1](https://github.com/FerasNasser1) |
+| Mohammed Abdulrahman Alrabiah | [@mohammed-alrabiah](https://github.com/mohammed-alrabiah) |
+| Naif Mohammed Alanazi | |
 
 <!-- Add a screenshot after your first run: save it as docs/screenshot.png -->
 <!-- ![Baloot table](docs/screenshot.png) -->
