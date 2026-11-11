@@ -1,5 +1,6 @@
-# Baloot بلوت
 
+# Baloot بلوت
+**[▶ Play Baloot in your browser | العب بلوت الآن](https://ferasnasser1.github.io/Ballot-ai/)**
 Saudi **Baloot** against three AI players: you and your AI partner against two AI opponents.
 The agents combine several classic AI techniques: constraint satisfaction, a logical knowledge
 base, Monte Carlo sampling of the hidden cards, and alpha-beta search.
